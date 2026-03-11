@@ -1,0 +1,28 @@
+.DS_Store
+*.asv
+*.autosave
+*.bak
+*.log
+*.tmp
+*.swp
+*.swo
+*.m~
+*.matlab
+matlab_crash_dump*
+crash_dump.*
+
+# MATLAB generated cache/build folders
+slprj/
+work/
+codegen/
+resources/project/
+
+# MATLAB settings and session artifacts
+*.mex*
+*.mltbx~
+*.prj.bak
+
+# Python / notebook noise if created during analysis
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

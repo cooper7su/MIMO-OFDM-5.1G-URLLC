@@ -1,12 +1,47 @@
 # MIMO-OFDM 5.1G URLLC MATLAB Simulation Framework
 
-本项目是一个面向研究复现、论文图表导出和后续扩展的 MATLAB MIMO-OFDM 仿真框架。当前代码已完成：
+面向 5.1G URLLC 的研究级 MATLAB MIMO-OFDM 链路仿真平台，覆盖从单场景验证、全矩阵批量扫参，到 publication-ready 数据集、图表和审计报告的完整实验链路。当前仓库适合：
+
+- 研究复现与方法对比
+- 课程设计 / 毕业设计 / 答辩展示
+- 论文图表导出与结果归档
+- GitHub 作品集与工程展示
+
+**GitHub 仓库简介**
+
+`Research-grade MATLAB MIMO-OFDM URLLC simulation framework with static/dynamic channels, pilot-aided CSI estimation, finite-blocklength evaluation, and publication-ready datasets.`
+
+**当前完成状态**
 
 - Phase 1：工程重构与目录整理
 - Phase 2：批量实验基础设施与 `Rician` 信道接入
 - Phase 3：导频辅助 LS 信道估计、可选 MMSE 等化、URLLC 指标与多指标绘图
 - Phase 4：有限块长/短包评估、packet-length sweep、可靠性指标与 publication dataset
 - Phase 5：动态多径信道、统计先验 MMSE / Kalman / Bayesian 估计链路、统一 Phase 5 publication 数据集与审计报告
+
+**仓库亮点**
+
+- 完整链路：信息比特、编码、调制、OFDM、MIMO/STBC、信道、估计、等化、译码、统计全覆盖
+- 多维实验：支持 `MIMO x Channel x Coding x Modulation x PacketLength` 全矩阵 sweep
+- 结果可复现：统一 `cfg` 配置、固定随机种子、保留 Phase 2–5 结果与回归基线
+- 面向展示：仓库内已包含 publication dataset、批量报告、审计报告和图表输出
+- 向后兼容：保留 `debug_test.m`、`for_test_codedRS.m`、`for_test_codedLDPC.m`
+
+**从哪里开始**
+
+- 想快速运行一个场景：看 `main_run.m`
+- 想批量生成整组实验：看 `main_batch.m`
+- 想看核心执行链路：看 `main/run_single_case.m`
+- 想看信道、估计与接收机：看 `channels/`、`mimo/`、`ofdm/`
+- 想看最终数据集与图表：看 `results/phase5_publication/`
+- 想看完整实验结果：看 `results/batch_sweeps/`
+
+**公开仓库导航**
+
+- 如果你是第一次看这个仓库，建议按 `README -> main_run.m -> main_batch.m -> results/phase5_publication/ -> results/batch_sweeps/` 的顺序浏览。
+- 如果你只关心可展示成果，优先看 `results/phase5_publication/phase5_publication_dataset.mat`、`phase5_progress_report.md`、`phase5_audit_report.md` 和 `plots/`。
+- 如果你只关心代码结构，优先看 `configs/`、`main/`、`channels/`、`mimo/`、`ofdm/`、`coding/`、`validation/`。
+- 本仓库有意保留 `results/` 大量数据和图，以保证可复现与可审计，因此仓库体积较大。
 
 当前维护的主链路支持：
 
@@ -42,6 +77,17 @@ MIMO_OFDM_simulation-main/
 ├── results/                   % 单场景和批量结果
 └── archive/                   % 遗留脚本、旧图、历史材料
 ```
+
+### 目录导览
+
+- `main_run.m`：最清晰的单场景入口，适合首次运行、调试和理解主流程。
+- `main_batch.m`：批量 sweep 入口，适合论文图表、基线对比和大规模结果归档。
+- `configs/`：统一参数入口，所有 MIMO、信道、估计、有限块长和统计参数都从这里派生。
+- `main/`：真正的发射链、信道调用、接收链和统计主流程。
+- `channels/`：静态与动态信道、LS/MMSE/Kalman/Bayesian 估计逻辑的核心位置。
+- `validation/`：无噪声回环、AWGN 理论对齐、RS/LDPC sanity check 和 Phase 5 smoke validation。
+- `results/phase5_publication/`：最适合公开展示的成果目录，包含统一数据集、报告和 publication 图。
+- `results/batch_sweeps/`：每一轮 sweep 的原始结果目录，适合回溯具体场景和做二次分析。
 
 ## Phase 5 核心流程
 
